@@ -15,8 +15,10 @@ export default class App extends Component {
 
     this.state = { videos: [] };
     this.state = { term:'surfboards'};
-    YTSearch({key: API_KEY, term: this.state.term}, function (data) {
-      console.log(data);
+    YTSearch({key: API_KEY, term: this.state.term},  (videos) => {
+      this.setState({ videos });
+      // ES6 expands to this.setStat({ videos : videos}) only works
+      // when key and value have same name 
     });
 
   }
