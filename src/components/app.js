@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import YTSearch from 'youtube-api-search'
 import SearchBar from './search_bar'
+import VideoList from './video_list'
 
 const API_KEY = 'AIzaSyCJH8Y_ZExpA6SMLvSn2i0zV-R1EPYcnZA';
 
@@ -14,11 +15,11 @@ export default class App extends Component {
     super(props);
 
     this.state = { videos: [] };
-    this.state = { term:'surfboards'};
-    YTSearch({key: API_KEY, term: this.state.term},  (videos) => {
+
+    YTSearch({key: API_KEY, term:'surfboards'},  (videos) => {
       this.setState({ videos });
       // ES6 expands to this.setStat({ videos : videos}) only works
-      // when key and value have same name 
+      // when key and value have same name
     });
 
   }
@@ -26,6 +27,7 @@ export default class App extends Component {
     return (
       <div>
         <SearchBar />
+        <VideoList videos = {this.state.videos} />
       </div>
     );
   }
